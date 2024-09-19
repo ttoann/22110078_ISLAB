@@ -61,7 +61,7 @@ Dựa vào stackframe, ta biết được sau 40 bytes của `buf` sẽ đến 4
 
 ![i7](./Image/Screenshot%202024-09-19%20220613.png)
 
-### BOF2.3
+### BOF3.c
 Dưới đây là code của `bof3.c`
 ![i8](./Image/Screenshot%202024-09-20%20001339.png)
 
