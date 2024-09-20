@@ -2,9 +2,11 @@
 ## Task 1: Inject code to delete file_asm through vuln.c is given on github
 
 Dưới đây là code của `vuln.c`
+
 ![task1.1](./image/task1.1.png)
 
 Và đây là code của `file_del.asm`
+
 ![task1.2](./image/task1.2.png)
 
 Đầu tiên chúng ta sẽ liên kết tới máy ảo bằng cách sử dụng câu lệnh `docker run -it --privileged -v $HOME/Seclabs:/home/seed/seclabs img4lab`
